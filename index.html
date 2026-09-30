@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>รถบรรทุกธรรมะ V.2 | ช่างเบิร์ดโคตรเฟี้ยว - PATICCA MATRIX OS</title>
+  <!-- Google Fonts: Kanit & Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            metal: {
+              900: '#0d1117',
+              800: '#161b22',
+              700: '#21262d',
+              600: '#30363d',
+              500: '#484f58',
+            },
+            dharma: {
+              gold: '#ffd700',
+              amber: '#f59e0b',
+              glow: '#fbbf24',
+              lotus: '#10b981',
+              neon: '#06b6d4',
+            }
+          },
+          fontFamily: {
+            sans: ['Kanit', 'sans-serif'],
+            mono: ['Orbitron', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Industrial & Quantum Aesthetics */
+    body {
+      background-color: #090d12;
+      color: #e6edf3;
+      overflow-x: hidden;
+    }
+    .grid-bg {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+    }
+    .metal-border {
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.05);
+    }
+    .neon-text-gold {
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+    }
+    .neon-text-cyan {
+      text-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+    }
+    .living-a4 {
+      box-shadow: 0 10px 40px -10px rgba(0,0,0,0.9), 0 0 20px rgba(255, 215, 0, 0.15);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #30363d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffd700;
+    }
+  </style>
+</head>
+<body class="grid-bg font-sans min-h-screen flex flex-col selection:bg-dharma-amber selection:text-black">
+
+  <!-- TOP STATUS BAR: HUD ENGINE -->
+  <header class="w-full bg-metal-900 border-b border-metal-600 px-4 py-3 sticky top-0 z-50 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-dharma-gold via-dharma-amber to-red-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-dharma-amber/30">
+        🚚
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-mono text-xs text-dharma-gold tracking-widest uppercase">PATICCA MATRIX OS // V2.0</span>
+          <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        </div>
+        <h1 class="text-lg font-extrabold text-white tracking-wide">
+          รถบรรทุกธรรมะ <span class="text-dharma-gold font-normal">| หน่วยกู้ชีพช่างพรธวัช</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <div class="hidden md:flex flex-col text-right">
+        <span class="text-xs text-metal-500 uppercase font-mono">CHIEF ARCHITECT</span>
+        <span class="text-sm font-bold text-dharma-cyan neon-text-cyan">ช่างเบิร์ดโคตรเฟี้ยว ⚙️</span>
+      </div>
+      <button onclick="toggleManual()" class="px-3 py-1.5 bg-metal-700 hover:bg-metal-600 border border-dharma-amber/40 hover:border-dharma-amber text-dharma-gold text-xs font-semibold rounded-md flex items-center gap-1.5 transition">
+        <span>📖 คู่มือซ่อมรถช่างเบิร์ด</span>
+      </button>
+      <button onclick="exportSeed()" class="px-3 py-1.5 bg-dharma-gold hover:bg-yellow-400 text-black font-bold text-xs rounded-md shadow-md transition flex items-center gap-1">
+        <span>🌟 เมล็ดพันธุ์ปัญญา</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT COLUMN: 3D VOXEL COCKPIT (7 COLS) -->
+    <div class="lg:col-span-7 flex flex-col gap-4">
+      
+      <!-- Interactive 3D Voxel Viewport -->
+      <div class="relative bg-metal-900 metal-border rounded-xl overflow-hidden flex flex-col h-[420px] md:h-[480px]">
+        
+        <!-- Viewport Header & State Controls -->
+        <div class="p-3 bg-metal-800/80 border-b border-metal-700 flex flex-wrap items-center justify-between gap-2 z-10">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono text-metal-500">VOXEL ENGINE:</span>
+            <span id="currentPhaseLabel" class="text-xs font-bold text-dharma-gold uppercase font-mono tracking-wider">
+              PHASE 4: DHARMA TRUCK
+            </span>
+          </div>
+          <div class="flex items-center gap-1 text-[11px]">
+            <span class="text-metal-500 hidden sm:inline">หมุนเมาส์/ลากเพื่อมองรอบทิศ</span>
+          </div>
+        </div>
+
+        <!-- 3D Canvas -->
+        <canvas id="voxelCanvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+
+        <!-- Phase Selector Cockpit Toolbar -->
+        <div class="absolute bottom-3 left-3 right-3 bg-metal-900/90 backdrop-blur-md p-2 rounded-lg border border-metal-600 flex flex-wrap items-center justify-between gap-2 z-10">
+          <div class="grid grid-cols-4 w-full gap-1 sm:gap-2">
+            <button onclick="setPhase(0)" id="btn-p0" class="phase-btn py-1.5 px-2 text-xs rounded font-medium bg-metal-800 hover:bg-metal-700 text-gray-300 border border-metal-700 transition text-center truncate">
+              1. สลายหมอกทุกข์
+            </button>
+            <button onclick="setPhase(1)" id="btn-p1" class="phase-btn py-1.5 px-2 text-xs rounded font-medium bg-metal-800 hover:bg-metal-700 text-gray-300 border border-metal-700 transition text-center truncate">
+              2. บล็อกวิศวกรรม
+            </button>
+            <button onclick="setPhase(2)" id="btn-p2" class="phase-btn py-1.5 px-2 text-xs rounded font-medium bg-metal-800 hover:bg-metal-700 text-gray-300 border border-metal-700 transition text-center truncate">
+              3. ดอกบัวเงินสด
+            </button>
+            <button onclick="setPhase(3)" id="btn-p3" class="phase-btn py-1.5 px-2 text-xs rounded font-bold bg-dharma-gold text-black border border-dharma-gold transition text-center truncate">
+              4. รถบรรทุกธรรมะ
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Voxel Explanation Strip -->
+      <div id="phaseExplanationBox" class="bg-metal-800/80 border border-metal-700 rounded-lg p-4 text-sm text-gray-300 transition-all">
+        <h3 class="text-dharma-gold font-bold text-base mb-1 flex items-center gap-2">
+          <span>🚚</span> รถบรรทุกพระธรรมพร้อมออกศึก (Dharma Truck Active)
+        </h3>
+        <p class="text-xs leading-relaxed text-gray-300">
+          ระบบรวมตัวกันเป็นโครงสร้างยานเกราะเคลื่อนที่ 84,000 พระธรรมขันธ์ พร้อมแผงโซล่าเซลล์ปัญญา มุ่งหน้าพาช่างพรทลายความมืดมนด้วย Action Plan รายสัปดาห์
+        </p>
+      </div>
+
+      <!-- Quick Financial Reality Decoupler -->
+      <div class="bg-metal-900 border border-metal-700 rounded-xl p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>⚙️</span> เครื่องมือแยกหนี้ออกจากชีวิต (Reality Decoupler)
+          </h2>
+          <span class="text-[11px] text-dharma-lotus font-mono">คำสอนหลวงพ่อฤๅษีลิงดำ</span>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+            <span class="text-xs text-metal-500 block mb-1">กายและใจ (ของจริง)</span>
+            <div class="text-sm font-bold text-green-400">บริสุทธิ์ ไม่ใช่หนี้</div>
+            <p class="text-[11px] text-gray-400 mt-1">สมอง สองมือ และลมหายใจของช่างพร ยังอยู่ครบ 100%</p>
+          </div>
+          <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+            <span class="text-xs text-metal-500 block mb-1">สัญญาที่ดิน (สมมุติ)</span>
+            <div class="text-sm font-bold text-yellow-400">กระดาษตัวเลข</div>
+            <p class="text-[11px] text-gray-400 mt-1">เป็นสัญญาทางโลก แก้ได้ด้วยการปรับโครงสร้างหนี้</p>
+          </div>
+          <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+            <span class="text-xs text-metal-500 block mb-1">เส้นเลือดใหญ่ที่ต้องปกป้อง</span>
+            <div class="text-sm font-bold text-cyan-400">อนาคตของลูก</div>
+            <p class="text-[11px] text-gray-400 mt-1">ลูกเรียนต่อได้ตามปกติ พ่อกำลังเดินเครื่องแก้ปัญหา</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: LIVING A4 DYNAMIC MAGAZINE (5 COLS) -->
+    <div class="lg:col-span-5 flex flex-col gap-4">
+      
+      <!-- A4 Sheet Container -->
+      <div class="bg-[#12161f] living-a4 border border-metal-600 rounded-xl p-5 md:p-6 text-gray-200 flex flex-col justify-between">
+        
+        <!-- Document Header -->
+        <div class="border-b border-metal-700 pb-4 mb-4">
+          <div class="flex items-center justify-between text-xs text-metal-500 font-mono mb-1">
+            <span>DOC-NO: PATICCA-CH-001</span>
+            <span>RESTRICTED // EMERGENCY MISSION</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-white tracking-wide">
+            พิมพ์เขียวปลดทุกข์ช่างพรธวัช
+          </h2>
+          <p class="text-xs text-dharma-gold mt-0.5">
+            สถาปัตยกรรมกู้ชีวิตด้วยศาสตร์พระราชา & กราฟปฏิจจสมุปบาท
+          </p>
+        </div>
+
+        <!-- Strategy Checklist & Interactive Progress -->
+        <div class="space-y-4 mb-6">
+          <div class="text-xs uppercase font-mono text-metal-500 tracking-wider">
+            ยุทธวิธีรับมือวิกฤต (TACTICAL STEPS):
+          </div>
+
+          <!-- Step 1 -->
+          <label class="flex items-start gap-3 p-2.5 rounded-lg bg-metal-800/60 border border-metal-700 hover:border-dharma-gold/50 cursor-pointer transition">
+            <input type="checkbox" checked class="mt-1 w-4 h-4 rounded text-dharma-gold bg-metal-900 border-metal-600 focus:ring-0">
+            <div>
+              <span class="text-xs font-bold text-white block">1. สติสลายความกลัว (ตัดวงจรความเครียด)</span>
+              <span class="text-[11px] text-gray-400">แยกกระดาษหนี้ออกจากตัวตน ไม่ให้ความเครียดล้นไปถึงการเรียนของลูก</span>
+            </div>
+          </label>
+
+          <!-- Step 2 -->
+          <label class="flex items-start gap-3 p-2.5 rounded-lg bg-metal-800/60 border border-metal-700 hover:border-dharma-gold/50 cursor-pointer transition">
+            <input type="checkbox" checked class="mt-1 w-4 h-4 rounded text-dharma-gold bg-metal-900 border-metal-600 focus:ring-0">
+            <div>
+              <span class="text-xs font-bold text-white block">2. ตรึงกระสุนการศึกษาของลูก</span>
+              <span class="text-[11px] text-gray-400">แบ่งเงินก้อนสำหรับค่าเทอมและค่ากินอยู่ของลูกไว้ในบัญชีปลอดภัย ห้ามแตะ</span>
+            </div>
+          </label>
+
+          <!-- Step 3 -->
+          <label class="flex items-start gap-3 p-2.5 rounded-lg bg-metal-800/60 border border-metal-700 hover:border-dharma-gold/50 cursor-pointer transition">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-dharma-gold bg-metal-900 border-metal-600 focus:ring-0">
+            <div>
+              <span class="text-xs font-bold text-white block">3. เปลี่ยนที่ดินขายไม่ออกให้เป็นกระแสเงินสด (Lift)</span>
+              <span class="text-[11px] text-gray-400">ซอยแปลงแบ่งเช่าระยะสั้น หรือทำเกษตรโคกหนองนาเพื่อสร้างรายได้รายวัน</span>
+            </div>
+          </label>
+
+          <!-- Step 4 -->
+          <label class="flex items-start gap-3 p-2.5 rounded-lg bg-metal-800/60 border border-metal-700 hover:border-dharma-gold/50 cursor-pointer transition">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-dharma-gold bg-metal-900 border-metal-600 focus:ring-0">
+            <div>
+              <span class="text-xs font-bold text-white block">4. เดินหน้าเจรจาปรับโครงสร้างหนี้</span>
+              <span class="text-[11px] text-gray-400">เข้าพบเจ้าหนี้ด้วยข้อมูล ไม่หนี ยืดเวลาผ่อนชำระเพื่อลดค่างวดรายเดือน</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Cash Flow Lift Calculator (Interactive) -->
+        <div class="bg-metal-900 p-4 rounded-xl border border-metal-700 mb-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-dharma-gold">ประเมินแรงยกกระแสเงินสด (Lift vs Gravity)</span>
+            <span class="text-[10px] text-metal-500 font-mono">SIMULATOR</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-gray-400">ดอกเบี้ยต่อเดือน (แรงโน้มถ่วง):</span>
+              <input type="number" id="gravityVal" value="12000" class="w-24 bg-metal-800 border border-metal-600 rounded px-2 py-0.5 text-right text-red-400 font-mono" oninput="calculateLift()">
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-gray-400">รายได้เสริมช่าง + ผลผลิตที่ดิน (แรงยก):</span>
+              <input type="number" id="liftVal" value="15000" class="w-24 bg-metal-800 border border-metal-600 rounded px-2 py-0.5 text-right text-green-400 font-mono" oninput="calculateLift()">
+            </div>
+            <div class="pt-2 border-t border-metal-700 flex justify-between items-center text-xs font-bold">
+              <span>สถานะสุทธิ (Net Cashflow):</span>
+              <span id="netResult" class="text-green-400 font-mono">+3,000 บาท/เดือน (รอด!)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signature Seal -->
+        <div class="flex items-center justify-between pt-4 border-t border-metal-700 text-xs text-metal-500">
+          <div>
+            <span>อนุมัติโดย: </span>
+            <strong class="text-dharma-gold">ช่างเบิร์ดโคตรเฟี้ยว</strong>
+          </div>
+          <div class="font-mono text-[10px]">SEALED & VERIFIED</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL: CHANG BIRD'S POCKET MANUAL -->
+  <div id="manualModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-metal-900 metal-border rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 text-gray-200">
+      
+      <div class="flex items-center justify-between border-b border-metal-700 pb-3 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📖</span>
+          <h3 class="text-lg font-extrabold text-dharma-gold">คู่มือซ่อมรถฉบับพกพาช่างเบิร์ด</h3>
+        </div>
+        <button onclick="toggleManual()" class="text-metal-500 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <div class="space-y-4 text-xs leading-relaxed">
+        <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+          <strong class="text-dharma-cyan block mb-1 text-sm">🛠️ 1. เช็กลมหายใจทุกเช้า (Sati Check)</strong>
+          <p>หายใจเข้าลึกๆ ดึงสติกลับมาที่ปัจจุบัน ร่างกายเรายังแข็งแรงดี สัญญากระดาษไม่ใช่ตัวเรา อย่าให้ความกลัวมาเติมในถังน้ำมันเด็ดขาด</p>
+        </div>
+
+        <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+          <strong class="text-yellow-400 block mb-1 text-sm">⚙️ 2. วิธีแก้เมื่อสมองตื้อ มืดแปดด้าน</strong>
+          <p>หากเครียดเรื่องเงิน ให้กดสลับไปที่ <em>Voxel Phase 1 (สลายหมอกทุกข์)</em> วางภาระลง 5 นาที ล้างหน้า ดื่มน้ำเย็น แล้วค่อยกลับมามองตัวเลขด้วยโยนิโสมนสิการ</p>
+        </div>
+
+        <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+          <strong class="text-green-400 block mb-1 text-sm">🌱 3. ศาสตร์พระราชาต้านแรงโน้มถ่วงดอกเบี้ย</strong>
+          <p>ที่ดินแปลงใหญ่ขายยาก ให้ซอยย่อยแบ่งเช่า หรือทำพืชล้มลุกกินได้ขายไว เลิกหวังเงินก้อนใหญ่เพียงอย่างเดียว ให้มองหาเงินรายวันเข้ามาค้ำค่างวด</p>
+        </div>
+
+        <div class="bg-metal-800 p-3 rounded-lg border border-metal-700">
+          <strong class="text-red-400 block mb-1 text-sm">🛑 4. กฎเหล็กประจำรถบรรทุก</strong>
+          <p>รถคันนี้สร้างมาเพื่อช่วยเหลือคนรากหญ้าโดยไม่มีค่าใช้จ่าย ห้ามแสวงหาผลประโยชน์ส่วนตน และห้ามทอดทิ้งช่างพรจนกว่าจะยืนได้ด้วยตัวเอง</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button onclick="toggleManual()" class="px-4 py-2 bg-dharma-gold hover:bg-yellow-400 text-black font-bold text-xs rounded-lg transition">
+          ปิดคู่มือและลุยงานต่อ
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT: 3D VOXEL ENGINE & INTERACTIVITY -->
+  <script>
+    // --- VOXEL 3D ENGINE (CANVAS BASED) ---
+    const canvas = document.getElementById('voxelCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    let currentPhase = 3; // Default: Dharma Truck
+    let angleX = 0.4;
+    let angleY = -0.6;
+    let isDragging = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    // Voxel Data Structures for 4 Phases
+    let voxels = [];
+
+    const phaseDescriptions = [
+      {
+        title: "🌫️ สลายหมอกควันแห่งอุปาทาน (Chaos Dissolution)",
+        text: "ฝุ่นอนุภาคกระจายตัว สลายภาพความเครียดเรื่องหนี้ที่ดิน แยกแยะกายใจออกจากสัญญาหนี้สินอย่างมีสติ"
+      },
+      {
+        title: "🧱 บล็อกวิศวกรรมโครงสร้างหนี้ (Structural Bricks)",
+        text: "จัดเรียงปัญหาเป็นบล็อกตัวต่อ แยกต้นเงิน ดอกเบี้ย และค่าเล่าเรียนของลูกออกเป็นสัดส่วนชัดเจน ไม่ปะปนกัน"
+      },
+      {
+        title: "🪷 ดอกบัวแห่งกระแสเงินสด (Lotus Cash Flow)",
+        text: "ศาสตร์พระราชาผลิบาน เปลี่ยนที่ดินรกร้างให้เป็นพืชผักสวนครัวและแบ่งเช่าระยะสั้น สร้างแรงยกสู้ดอกเบี้ย"
+      },
+      {
+        title: "🚚 รถบรรทุกพระธรรมพร้อมออกศึก (Dharma Truck Active)",
+        text: "โครงข่าย 84,000 โหนดรวมตัวเป็นรถบรรทุกควอนตัม พร้อมคัมภีร์ A4 มีชีวิต เพื่อนำพาช่างพรก้าวสู่อิสรภาพ"
+      }
+    ];
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      width = canvas.width;
+      height = canvas.height;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      generateVoxels();
+    }
+
+    // Generate Voxel Coordinates based on Selected Phase
+    function generateVoxels() {
+      voxels = [];
+      const count = 180;
+
+      if (currentPhase === 0) {
+        // Chaos Cloud (Dust)
+        for (let i = 0; i < 220; i++) {
+          voxels.push({
+            x: (Math.random() - 0.5) * 220,
+            y: (Math.random() - 0.5) * 160,
+            z: (Math.random() - 0.5) * 220,
+            size: 4 + Math.random() * 4,
+            color: Math.random() > 0.4 ? '#4a5568' : '#e2e8f0'
+          });
+        }
+      } else if (currentPhase === 1) {
+        // Engineering Structural Blocks
+        const gridSize = 4;
+        for (let x = -gridSize; x <= gridSize; x += 2) {
+          for (let y = -2; y <= 2; y += 2) {
+            for (let z = -gridSize; z <= gridSize; z += 2) {
+              let color = '#3b82f6';
+              if (y < 0) color = '#ef4444'; // debt
+              if (y > 0) color = '#10b981'; // asset
+              voxels.push({
+                x: x * 18,
+                y: y * 20,
+                z: z * 18,
+                size: 14,
+                color: color
+              });
+            }
+          }
+        }
+      } else if (currentPhase === 2) {
+        // Lotus Geometry
+        for (let ring = 1; ring <= 4; ring++) {
+          const petals = ring * 8;
+          const radius = ring * 25;
+          for (let i = 0; i < petals; i++) {
+            const angle = (i / petals) * Math.PI * 2;
+            voxels.push({
+              x: Math.cos(angle) * radius,
+              y: Math.sin(angle * 2) * 15 - (ring * 8),
+              z: Math.sin(angle) * radius,
+              size: 8,
+              color: ring === 4 ? '#ffd700' : '#10b981'
+            });
+          }
+        }
+      } else if (currentPhase === 3) {
+        // Dharma Truck (Cab, Trailer, Wheels)
+        // Trailer Body
+        for (let x = -50; x <= 30; x += 15) {
+          for (let y = -25; y <= 15; y += 14) {
+            for (let z = -25; z <= 25; z += 15) {
+              voxels.push({ x, y, z, size: 10, color: '#f59e0b' });
+            }
+          }
+        }
+        // Front Cab
+        for (let x = 35; x <= 65; x += 14) {
+          for (let y = -25; y <= 5; y += 14) {
+            for (let z = -22; z <= 22; z += 14) {
+              voxels.push({ x, y, z, size: 11, color: '#ffd700' });
+            }
+          }
+        }
+        // Wheels
+        const wheelPositions = [
+          [-35, 26, -24], [-35, 26, 24],
+          [10, 26, -24], [10, 26, 24],
+          [50, 26, -24], [50, 26, 24]
+        ];
+        wheelPositions.forEach(pos => {
+          voxels.push({ x: pos[0], y: pos[1], z: pos[2], size: 13, color: '#06b6d4' });
+        });
+      }
+    }
+
+    // Render 3D Scene
+    function render() {
+      const rect = canvas.getBoundingClientRect();
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      // Auto-rotation slightly if not dragging
+      if (!isDragging) {
+        angleY += 0.008;
+      }
+
+      const cosX = Math.cos(angleX);
+      const sinX = Math.sin(angleX);
+      const cosY = Math.cos(angleY);
+      const sinY = Math.sin(angleY);
+
+      // Transform and sort for depth
+      const projected = voxels.map(v => {
+        // Rotate Y
+        let x1 = v.x * cosY + v.z * sinY;
+        let z1 = -v.x * sinY + v.z * cosY;
+        // Rotate X
+        let y2 = v.y * cosX - z1 * sinX;
+        let z2 = v.y * sinX + z1 * cosX;
+
+        // Perspective Projection
+        const fov = 350;
+        const scale = fov / (fov + z2 + 200);
+        return {
+          px: cx + x1 * scale,
+          py: cy + y2 * scale,
+          pSize: Math.max(2, v.size * scale),
+          depth: z2,
+          color: v.color
+        };
+      });
+
+      projected.sort((a, b) => b.depth - a.depth);
+
+      // Draw Projected Voxels
+      projected.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.roundRect(p.px - p.pSize / 2, p.py - p.pSize / 2, p.pSize, p.pSize, 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      requestAnimationFrame(render);
+    }
+
+    // Mouse Controls for 3D View
+    canvas.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+      angleY += dx * 0.01;
+      angleX += dy * 0.01;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    // Touch controls for mobile
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        lastMouseX = e.touches[0].clientX;
+        lastMouseY = e.touches[0].clientY;
+      }
+    });
+
+    window.addEventListener('touchend', () => isDragging = false);
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - lastMouseX;
+      const dy = e.touches[0].clientY - lastMouseY;
+      angleY += dx * 0.01;
+      angleX += dy * 0.01;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    });
+
+    // Switch Phase
+    function setPhase(phase) {
+      currentPhase = phase;
+      document.getElementById('currentPhaseLabel').innerText = `PHASE ${phase + 1}: ${phaseDescriptions[phase].title.split(' ')[1]}`;
+      
+      const box = document.getElementById('phaseExplanationBox');
+      box.innerHTML = `
+        <h3 class="text-dharma-gold font-bold text-base mb-1">${phaseDescriptions[phase].title}</h3>
+        <p class="text-xs leading-relaxed text-gray-300">${phaseDescriptions[phase].text}</p>
+      `;
+
+      // Update button highlights
+      document.querySelectorAll('.phase-btn').forEach((btn, i) => {
+        if (i === phase) {
+          btn.className = "phase-btn py-1.5 px-2 text-xs rounded font-bold bg-dharma-gold text-black border border-dharma-gold transition text-center truncate";
+        } else {
+          btn.className = "phase-btn py-1.5 px-2 text-xs rounded font-medium bg-metal-800 hover:bg-metal-700 text-gray-300 border border-metal-700 transition text-center truncate";
+        }
+      });
+
+      generateVoxels();
+    }
+
+    // Toggle Manual Modal
+    function toggleManual() {
+      const modal = document.getElementById('manualModal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Interactive Lift vs Gravity Calculation
+    function calculateLift() {
+      const gravity = parseFloat(document.getElementById('gravityVal').value) || 0;
+      const lift = parseFloat(document.getElementById('liftVal').value) || 0;
+      const net = lift - gravity;
+      const resEl = document.getElementById('netResult');
+
+      if (net >= 0) {
+        resEl.className = "text-green-400 font-mono";
+        resEl.innerText = `+${net.toLocaleString()} บาท/เดือน (มีแรงยก! รอดพ้น)`;
+      } else {
+        resEl.className = "text-red-400 font-mono";
+        resEl.innerText = `${net.toLocaleString()} บาท/เดือน (ต้องเพิ่มรายได้เสริมอีก)`;
+      }
+    }
+
+    // Export Seed of Wisdom
+    function exportSeed() {
+      const seedData = {
+        title: "SEED OF WISDOM // PATICCA MATRIX OS",
+        author: "ช่างเบิร์ดโคตรเฟี้ยว",
+        target: "ช่างพรธวัช",
+        timestamp: new Date().toISOString(),
+        coreFormula: "กายใจ != สัญญาหนี้ (ดอกเบี้ยต้านได้ด้วยกระแสเงินสด)",
+        actionPlan: [
+          "1. ตัดอุปาทานความกลัว แยกกระดาษออกจากชีวิต",
+          "2. ปกป้องค่าเล่าเรียนของลูกให้ปลอดภัย 100%",
+          "3. ซอยที่ดินแบ่งเช่า หรือทำเกษตรโคกหนองนาสร้างรายวัน",
+          "4. ปรับโครงสร้างหนี้กับสถาบันการเงินด้วยสติ"
+        ]
+      };
+      
+      const blob = new Blob([JSON.stringify(seedData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "SEED_OF_WISDOM_CHANG_PHON.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      alert("🌟 เมล็ดพันธุ์ปัญญา (Seed of Wisdom) ถูกส่งออกเรียบร้อยแล้ว! พร้อมส่งต่อให้ช่างพรใช้งานทันที");
+    }
+
+    // Window Init
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('DOMContentLoaded', () => {
+      resizeCanvas();
+      render();
+      calculateLift();
+    });
+  </script>
+</body>
+</html>
